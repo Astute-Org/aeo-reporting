@@ -19,6 +19,5 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/server/package.json ./server/
 COPY --from=build /app/server/dist ./server/dist
 COPY --from=build /app/client/dist ./client/dist
-VOLUME ["/app/data"]
 EXPOSE 3400
 CMD ["node", "server/dist/index.js"]
