@@ -1,6 +1,6 @@
 // The half that talks to the network. Rendering lives in CompanyView.tsx.
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { api } from '../api';
 import { useToast } from '../ui/Toast';
 import { SkeletonCard } from '../ui/Shimmer';
@@ -63,12 +63,17 @@ export function CompanyCard({
   useEffect(() => { void load(); }, [load]);
 
   // While a reading is in flight, poll so the progress banner moves and the
-  // numbers land without a refresh.
+  // numbers land without a refresh. When it finishes, the list in the sidebar
+  // (reading count, running dot) is stale too, so tell the parent.
+  const wasRunning = useRef(false);
   useEffect(() => {
-    if (!report?.inProgress) return;
+    const running = Boolean(report?.inProgress);
+    if (wasRunning.current && !running) onChanged();
+    wasRunning.current = running;
+    if (!running) return;
     const t = setInterval(() => void loadReport(), POLL_MS);
     return () => clearInterval(t);
-  }, [report?.inProgress, loadReport]);
+  }, [report?.inProgress, loadReport, onChanged]);
 
   const run = async () => {
     if (!company) return;

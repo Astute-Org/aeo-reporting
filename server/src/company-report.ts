@@ -154,9 +154,8 @@ export function buildCompanyReport(companyId: string): CompanyReport | null {
   if (allRuns.length > runs.length) {
     caveats.push(`Showing the ${runs.length} most recent readings of ${allRuns.length}.`);
   }
-  if (inProgress) {
-    caveats.push('A reading is running now. The numbers below are the previous one until it finishes.');
-  }
+  // A reading in flight is not a caveat here: it travels as `inProgress`,
+  // with its progress, and the UI renders that as its own banner.
 
   return {
     companyId: company.id,

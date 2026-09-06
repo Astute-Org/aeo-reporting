@@ -48,7 +48,13 @@ function flag(value: string | undefined, fallback: boolean): boolean {
 }
 
 export const config = {
-  port: positive(env.PORT, 3400),
+  /**
+   * AEO_PORT wins over PORT. PORT is honoured so platforms that inject it just
+   * work, but some dev launchers set PORT for the process they open in the
+   * browser, which is the client, and the server must not follow it onto the
+   * same port. The dev script sets AEO_PORT for exactly that reason.
+   */
+  port: positive(env.AEO_PORT || env.PORT, 3400),
   /** Any username, this password. Empty means the app is open. */
   adminPassword: env.ADMIN_PASSWORD ?? '',
   dataDir: env.AEO_DATA_DIR ? path.resolve(env.AEO_DATA_DIR) : path.join(REPO_ROOT, 'data'),

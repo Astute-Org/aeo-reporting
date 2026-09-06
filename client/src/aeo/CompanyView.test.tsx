@@ -109,6 +109,8 @@ describe('CompanyReportView', () => {
     const html = render({ report: report({ inProgress: { runId: 'run-2', startedAt: '2026-08-21T00:00:00.000Z', answersExpected: 60, answersSoFar: 12 } }) });
     assert.match(html, /12 of 60 answers in/);
     assert.match(html, /previous reading until it finishes/);
+    // Rendered once, as the banner: the report does not also carry it as a caveat.
+    assert.equal((html.match(/reading is running now/g) ?? []).length, 1);
   });
 
   it('draws the trend only once there is something to draw', () => {

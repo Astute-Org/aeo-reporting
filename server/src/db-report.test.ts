@@ -120,7 +120,8 @@ describe('report from stored rows', () => {
     assert.equal(progress!.answersExpected, 8);
     const report = buildCompanyReport(f.companyId)!;
     assert.equal(report.latest!.runId, done);
-    assert.ok(report.caveats.some((c) => c.includes('running now')));
+    assert.equal(report.inProgress!.answersExpected, 8);
+    assert.ok(!report.caveats.some((c) => c.includes('running now')), 'in-flight travels as inProgress, not as a caveat');
   });
 
   test('an unknown company is null', () => {

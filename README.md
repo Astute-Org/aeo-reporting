@@ -155,7 +155,7 @@ cannot be placed and breaks the line.
 Requires Node 22 or newer.
 
 ```bash
-git clone <this repo> aeo-reporting
+git clone https://github.com/Astute-Org/aeo-reporting.git
 cd aeo-reporting
 cp .env.example .env    # add the keys you have
 npm install
@@ -200,7 +200,7 @@ or from the process environment. Every key is optional.
 | `AEO_PANEL_MODEL` | same as judge | The model that writes the question panel |
 | `AEO_LLM_SCORING` | `true` | Set `false` to skip the judge pass (no competitors, no leaderboard) |
 | `FIRECRAWL_API_KEY` | | Better page text for question writing on JavaScript-heavy sites |
-| `PORT` | `3400` | |
+| `PORT` | `3400` | The port to listen on. `AEO_PORT` wins when both are set |
 | `ADMIN_PASSWORD` | | HTTP basic auth over the whole app |
 | `AEO_DATA_DIR` | `./data` | Where `aeo.sqlite` lives |
 | `AEO_SCHEDULER_ENABLED` | `true` | Automatic readings on each company's cadence |
