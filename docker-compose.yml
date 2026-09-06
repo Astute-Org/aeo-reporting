@@ -1,0 +1,12 @@
+services:
+  aeo:
+    build: .
+    ports:
+      - "3400:3400"
+    env_file: .env
+    volumes:
+      - aeo-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  aeo-data: {}
