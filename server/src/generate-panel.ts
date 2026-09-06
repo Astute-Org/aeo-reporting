@@ -5,7 +5,7 @@
 // get quietly wrong. Two failure modes, both of which produce a
 // plausible-looking panel:
 //
-//   Branded prompts. "What is Calo?" always surfaces Calo, so a panel with
+//   Branded prompts. "What is Acme?" always surfaces Acme, so a panel with
 //   them in reports a high visibility that measures the company's name, not
 //   its standing in the market.
 //

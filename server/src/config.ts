@@ -37,6 +37,18 @@ loadEnvFile(process.env.AEO_ENV_FILE ?? path.join(REPO_ROOT, '.env'));
 
 const env = process.env;
 
+const dataDir = env.AEO_DATA_DIR ? path.resolve(env.AEO_DATA_DIR) : path.join(REPO_ROOT, 'data');
+
+// Google credentials as a JSON blob, for hosts where mounting a file is
+// awkward (most platforms-as-a-service). Written once to the data directory
+// and handed to the Google client through the standard variable.
+if (env.GOOGLE_APPLICATION_CREDENTIALS_JSON && !env.GOOGLE_APPLICATION_CREDENTIALS) {
+  const file = path.join(dataDir, 'gcp-credentials.json');
+  fs.mkdirSync(dataDir, { recursive: true });
+  fs.writeFileSync(file, env.GOOGLE_APPLICATION_CREDENTIALS_JSON, { mode: 0o600 });
+  process.env.GOOGLE_APPLICATION_CREDENTIALS = file;
+}
+
 function positive(value: string | undefined, fallback: number): number {
   const n = Number(value);
   return Number.isFinite(n) && n > 0 ? n : fallback;
@@ -57,7 +69,7 @@ export const config = {
   port: positive(env.AEO_PORT || env.PORT, 3400),
   /** Any username, this password. Empty means the app is open. */
   adminPassword: env.ADMIN_PASSWORD ?? '',
-  dataDir: env.AEO_DATA_DIR ? path.resolve(env.AEO_DATA_DIR) : path.join(REPO_ROOT, 'data'),
+  dataDir,
 
   // --- Answer engines: the assistants being measured ---
   openaiApiKey: env.OPENAI_API_KEY ?? '',

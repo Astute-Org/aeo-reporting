@@ -67,8 +67,8 @@ export function SetupForm({ status, onCreated, onCancel }: { status: Status | nu
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <TextInput label="Company name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Calo" required helpText="The exact name the scorer looks for in answers." />
-          <TextInput label="Website" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="calo.app" helpText="Questions are written from it, and citations of it are counted." />
+          <TextInput label="Company name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your company" required helpText="The exact name the scorer looks for in answers." />
+          <TextInput label="Website" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="yourcompany.com" helpText="Questions are written from it, and citations of it are counted." />
           <TextInput label="Also known as" value={aliases} onChange={(e) => setAliases(e.target.value)} placeholder="Comma-separated other names" helpText="Old names, short names, spellings an assistant might use." />
           <TextInput label="Competitors" value={competitors} onChange={(e) => setCompetitors(e.target.value)} placeholder="Comma-separated competitor names" helpText="The share-of-voice denominator. Miss one and it is silently absent." />
         </div>
@@ -76,7 +76,7 @@ export function SetupForm({ status, onCreated, onCancel }: { status: Status | nu
           label="Notes for question writing (optional)"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="e.g. Buyers are in Saudi Arabia and the UAE. Questions in English. The product is a meal subscription, not a restaurant."
+          placeholder="e.g. Buyers are small accounting firms in the UK. Questions in English. We sell software, not a service."
           helpText="Anything the website does not make obvious about who buys and where. Also used as the material when the website cannot be read."
         />
 
