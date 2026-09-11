@@ -2,6 +2,9 @@
 
 Measure how a company shows up in AI answer engines, reading by reading.
 
+See the [illustrative example report](docs/example-report.md) for a worked example
+of the metrics, leaderboard, and how to interpret them. All example data is fictional.
+
 When a buyer asks ChatGPT, Perplexity, Gemini or Claude about your market, do
 you come up? Are you recommended, compared, or named as the one to avoid? Who
 comes up more often than you? This tool asks the same buyer questions of every
